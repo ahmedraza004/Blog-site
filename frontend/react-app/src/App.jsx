@@ -1,0 +1,17 @@
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import Post from './pages/Post';
+import PostDetail from './pages/Postdetail'; // ensure actual file name/case matches
+import Registration from './pages/Registration';
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        {/* optional: send / to /posts */}
+        <Route path="/" element={<Navigate to="/posts" replace />} />
+        <Route path="/posts" element={<Post />} />
+        <Route path="/posts/:id/" element={<PostDetail />} />
+        <Route path="/register/" element={<Registration />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
