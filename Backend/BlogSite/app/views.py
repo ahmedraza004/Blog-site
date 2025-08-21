@@ -36,8 +36,14 @@ class LoginView(APIView):
 
     
 class PostViewset(ModelViewSet):
-    serializer_class = PostSerializer
+    # views.py
     queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    permission_classes = [IsAuthenticated]  # ensure auth required
+
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
+
 
 class CommentViewset(ModelViewSet):
     serializer_class =CommentSerializer

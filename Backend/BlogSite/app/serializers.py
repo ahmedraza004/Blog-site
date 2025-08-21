@@ -52,13 +52,15 @@ class CategorySerializer(serializers.ModelSerializer):
         model = Category
         fields = '__all__'
 
+# serializers.py
 class PostSerializer(serializers.ModelSerializer):
-    created_at = serializers.ReadOnlyField()
-    updated_at = serializers.ReadOnlyField()
-
-    comments = CommentSerializer(many=True,read_only = True)
-
     class Meta:
         model = Post
-        fields = ['id', 'title', 'content', 'author', 'created_at','updated_at' ,'comments']
+        fields = ['id', 'title', 'content', 'image', 'author', 'created_at']
+        read_only_fields = ['author']  # make sure frontend can't set it
+
+    def create(self, validated_data):
+        user = self.context['request'].user
+        return Post.objects.create(author=user, **validated_data)
+
         

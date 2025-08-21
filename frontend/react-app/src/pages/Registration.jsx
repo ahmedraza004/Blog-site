@@ -31,6 +31,7 @@ function Registration() {
     }, 2000); // Delay navigation to show message
   } catch (error) {
     console.error(error);
+    setSuccessMessage('Registation failled')
     alert('Registration failed');
   }
 };
