@@ -56,40 +56,59 @@ function CreatePost() {
     }
   };
 
-  return (
-    <form onSubmit={handleSubmit} encType="multipart/form-data">
+return (
+  <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+    <div className="w-full max-w-md bg-white shadow-lg rounded-lg p-6">
+      <h2 className="text-2xl font-semibold text-center text-gray-800 mb-6">
+        Create a New Post
+      </h2>
+
       {displayName && (
-        <p style={{ marginBottom: 8, color: '#555' }}>
+        <p className="mb-4 text-sm text-gray-600 text-center">
           Posting as: <strong>{displayName}</strong>
         </p>
       )}
 
-      <input
-        type="text"
-        name="title"
-        value={title}
-        onChange={e => setTitle(e.target.value)}
-        placeholder="Title"
-        required
-      />
-      <textarea
-        name="content"
-        value={content}
-        onChange={e => setContent(e.target.value)}
-        placeholder="Content"
-        required
-      />
-      <input
-        type="file"
-        name="image"
-        accept="image/*"
-        onChange={e => setImage(e.target.files?.[0] || null)}
-      />
-      <button type="submit" disabled={loading}>
-        {loading ? 'Submitting...' : 'Create Post'}
-      </button>
-    </form>
-  );
+      <form onSubmit={handleSubmit} encType="multipart/form-data" className="space-y-4">
+        <input
+          type="text"
+          name="title"
+          value={title}
+          onChange={e => setTitle(e.target.value)}
+          placeholder="Title"
+          required
+          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+
+        <textarea
+          name="content"
+          value={content}
+          onChange={e => setContent(e.target.value)}
+          placeholder="Content"
+          required
+          rows={4}
+          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+        />
+
+        <input
+          type="file"
+          name="image"
+          accept="image/*"
+          onChange={e => setImage(e.target.files?.[0] || null)}
+          className="w-full text-sm text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:bg-blue-500 file:text-white hover:file:bg-blue-600"
+        />
+
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md disabled:opacity-50"
+        >
+          {loading ? 'Submitting...' : 'Create Post'}
+        </button>
+      </form>
+    </div>
+  </div>
+);
 }
 
 export default CreatePost;
